@@ -21,11 +21,18 @@ class OrderForm
                     ->required(),
                 TextInput::make('brand')
                     ->required(),
+                TextInput::make('size')
+                    ->label('Size / المقاس')
+                    ->maxLength(120)
+                    ->nullable(),
                 Textarea::make('product_link')
                     ->default(null)
                     ->columnSpanFull(),
                 FileUpload::make('product_image')
-                    ->image(),
+                    ->image()
+                    ->disk('public')
+                    ->directory('orders')
+                    ->visibility('public'),
                 Select::make('status')
                     ->options([
             'pending' => 'Pending',

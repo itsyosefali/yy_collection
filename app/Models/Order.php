@@ -10,6 +10,7 @@ class Order extends Model
         'name',
         'phone',
         'brand',
+        'size',
         'product_link',
         'product_image',
         'status',

@@ -21,7 +21,14 @@ class OrdersTable
                     ->searchable(),
                 TextColumn::make('brand')
                     ->searchable(),
-                ImageColumn::make('product_image'),
+                TextColumn::make('size')
+                    ->label('Size')
+                    ->searchable()
+                    ->formatStateUsing(fn (?string $state): string => $state !== null && $state !== '' ? $state : '—'),
+                ImageColumn::make('product_image')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imageSize(56),
                 TextColumn::make('status')
                     ->badge(),
                 TextColumn::make('created_at')

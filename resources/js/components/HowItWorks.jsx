@@ -1,4 +1,5 @@
 import React from 'react';
+import Reveal from './Reveal';
 
 export default function HowItWorks() {
     const steps = [
@@ -47,17 +48,17 @@ export default function HowItWorks() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     
                     {/* Image Side (First in grid = Right in RTL) */}
-                    <div className="relative order-1">
-                        <div className="absolute inset-0 bg-contrast/5 -translate-x-4 translate-y-4"></div>
+                    <Reveal className="relative order-1 reveal-scale" delayClass="delay-100">
+                        <div className="absolute inset-0 bg-contrast/5 -translate-x-4 translate-y-4 transition-transform duration-700 hover:-translate-x-5 hover:translate-y-5" />
                         <img 
                             src="/images/how_it_works.png" 
                             alt="Browsing Fashion App" 
-                            className="relative z-10 w-full h-[600px] object-cover object-center border border-secondary/50 shadow-sm"
+                            className="relative z-10 w-full h-[600px] object-cover object-center border border-secondary/50 shadow-sm transition-transform duration-[2.2s] ease-out hover:scale-[1.02]"
                         />
-                    </div>
+                    </Reveal>
 
                     {/* Text Side (Second in grid = Left in RTL) */}
-                    <div className="flex flex-col justify-center order-2">
+                    <Reveal className="flex flex-col justify-center order-2" delayClass="delay-200">
                         <div className="mb-12">
                             <h2 className="text-4xl font-bold tracking-tight mb-4 font-serif text-primary">آلية العمل</h2>
                             <p className="text-xl text-primary/60">بكل بساطة، تسوقي من العالم وأنتِ في بيتك</p>
@@ -65,18 +66,21 @@ export default function HowItWorks() {
                         
                         <div className="space-y-8">
                             {steps.map((step, index) => (
-                                <div key={index} className="flex items-start gap-6 group">
-                                    <div className="w-12 h-12 shrink-0 bg-white/50 backdrop-blur-sm flex items-center justify-center text-primary border border-secondary/50 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                                <div
+                                    key={index}
+                                    className="flex items-start gap-6 group rounded-sm p-3 -m-3 transition-all duration-300 hover:bg-white/40 hover:shadow-md hover:-translate-y-0.5"
+                                >
+                                    <div className="w-12 h-12 shrink-0 bg-white/50 backdrop-blur-sm flex items-center justify-center text-primary border border-secondary/50 group-hover:bg-primary group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
                                         {step.icon}
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold mb-2 text-primary tracking-wide">{step.title}</h3>
+                                        <h3 className="text-xl font-bold mb-2 text-primary tracking-wide group-hover:text-contrast transition-colors duration-300">{step.title}</h3>
                                         <p className="text-primary/70 text-base leading-relaxed">{step.description}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </Reveal>
                     
                 </div>
             </div>

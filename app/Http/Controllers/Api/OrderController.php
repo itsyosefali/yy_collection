@@ -15,10 +15,11 @@ class OrderController extends Controller
     {
         $data = $request->validated();
 
-        // Handle image upload
         if ($request->hasFile('product_image')) {
             $data['product_image'] = $request->file('product_image')
                 ->store('orders', 'public');
+        } else {
+            unset($data['product_image']);
         }
 
         $order = Order::create($data);

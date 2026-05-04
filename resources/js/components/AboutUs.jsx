@@ -1,4 +1,5 @@
 import React from 'react';
+import Reveal from './Reveal';
 
 export default function AboutUs() {
     return (
@@ -7,7 +8,8 @@ export default function AboutUs() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     
                     {/* Text Side (First in grid = Right in RTL) */}
-                    <div className="flex flex-col justify-center order-2 lg:order-1 relative p-8 md:p-12 bg-white/60 backdrop-blur-md border border-secondary/50">
+                    <Reveal className="order-2 lg:order-1" delayClass="delay-100">
+                    <div className="flex flex-col justify-center relative p-8 md:p-12 bg-white/60 backdrop-blur-md border border-secondary/50 transition-shadow duration-500 hover:shadow-lg">
                         <div className="absolute -top-6 right-8 text-8xl text-contrast opacity-10 font-serif leading-none">"</div>
                         <div className="mb-8 relative z-10">
                             <span className="text-sm font-bold tracking-widest text-contrast uppercase mb-4 block">قصتنا</span>
@@ -23,16 +25,17 @@ export default function AboutUs() {
                         </p>
                         <div className="absolute -bottom-12 left-8 text-8xl text-contrast opacity-10 font-serif leading-none">"</div>
                     </div>
+                    </Reveal>
 
                     {/* Image Side (Second in grid = Left in RTL) */}
-                    <div className="relative order-1 lg:order-2">
-                        <div className="absolute inset-0 bg-contrast/5 translate-x-4 -translate-y-4"></div>
+                    <Reveal className="relative order-1 lg:order-2 reveal-scale" delayClass="delay-200">
+                        <div className="absolute inset-0 bg-contrast/5 translate-x-4 -translate-y-4 transition-transform duration-700 hover:translate-x-5 hover:-translate-y-5" />
                         <img 
                             src="/images/about_us.png" 
                             alt="Luxury Fashion Boutique" 
-                            className="relative z-10 w-full h-[600px] object-cover object-center border border-secondary/50 shadow-sm"
+                            className="relative z-10 w-full h-[600px] object-cover object-center border border-secondary/50 shadow-sm transition-transform duration-[2.2s] ease-out hover:scale-[1.02]"
                         />
-                    </div>
+                    </Reveal>
                     
                 </div>
             </div>

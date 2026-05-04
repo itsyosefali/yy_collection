@@ -17,5 +17,8 @@ php artisan view:cache
 # Run migrations
 php artisan migrate --force
 
+# Public disk URLs (/storage/...) need the symlink
+php artisan storage:link --force
+
 # Start the main process (Apache)
 exec "$@"

@@ -23,6 +23,7 @@ class StoreOrderRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20'],
             'brand' => ['required', 'string', 'max:255'],
+            'size' => ['required', 'string', 'max:120'],
             'product_link' => ['nullable', 'url', 'max:2048'],
             'product_image' => ['nullable', 'image', 'max:5120'], // 5MB max
         ];
@@ -55,6 +56,8 @@ class StoreOrderRequest extends FormRequest
             'phone.max' => 'رقم الهاتف طويل جداً',
             'brand.required' => 'اسم البراند مطلوب',
             'brand.max' => 'اسم البراند طويل جداً',
+            'size.required' => 'المقاس مطلوب',
+            'size.max' => 'المقاس طويل جداً',
             'product_link.url' => 'يرجى إدخال رابط صحيح',
             'product_image.image' => 'يرجى رفع صورة صحيحة',
             'product_image.max' => 'حجم الصورة يجب أن لا يتجاوز 5 ميجابايت',

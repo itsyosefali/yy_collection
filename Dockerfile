@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Build Backend & Serve
-FROM php:8.3-apache
+FROM php:8.4-apache
 WORKDIR /var/www/html
 
 # Install system dependencies
@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libicu-dev \
     zip \
     unzip \
     libzip-dev \
@@ -26,14 +27,14 @@ RUN apt-get update && apt-get install -y \
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip pdo_sqlite
+# Install PHP extensions (intl required by Filament; icu from libicu-dev)
+RUN docker-php-ext-install intl pdo_mysql mbstring exif pcntl bcmath gd zip pdo_sqlite
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Configure Apache
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
@@ -46,8 +47,9 @@ COPY . .
 # Copy built frontend assets
 COPY --from=frontend /app/public/build ./public/build
 
-# Install backend dependencies
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+# Install backend dependencies (safe.directory: COPY may preserve non-root UIDs on .git)
+RUN git config --global --add safe.directory /var/www/html \
+    && composer install --no-interaction --no-dev --optimize-autoloader
 
 # Setup Permissions
 RUN chown -R www-data:www-data /var/www/html \

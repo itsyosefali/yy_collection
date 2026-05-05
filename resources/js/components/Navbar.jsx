@@ -50,9 +50,6 @@ export default function Navbar() {
                     <button type="button" onClick={() => scrollTo('about-us')} className="nav-link text-primary hover:text-contrast transition-colors font-medium">
                         قصتنا
                     </button>
-                    <button type="button" onClick={() => scrollTo('testimonials')} className="nav-link text-primary hover:text-contrast transition-colors font-medium">
-                        آراء العملاء
-                    </button>
                     <button type="button" onClick={() => scrollTo('contact')} className="nav-link text-primary hover:text-contrast transition-colors font-medium">
                         تواصل معنا
                     </button>

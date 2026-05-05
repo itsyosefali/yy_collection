@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
 import AboutUs from '../components/AboutUs';
 import HowItWorks from '../components/HowItWorks';
-import Testimonials from '../components/Testimonials';
 import OrderCallout from '../components/OrderCallout';
 import Contact from '../components/Contact';
 
@@ -27,7 +26,6 @@ export default function HomePage() {
             <Hero />
             <HowItWorks />
             <AboutUs />
-            <Testimonials />
             <OrderCallout />
             <Contact />
         </>
